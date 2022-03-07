@@ -1,0 +1,80 @@
+body {
+  max-width: 50%;
+  margin: 5% auto;
+  font-family: "Zen Kurenaido", sans-serif;
+  line-height: 24px;
+  /* TODO: change cursor! */
+  cursor: pointer;
+}
+
+h1 {
+  margin-bottom: 0;
+  font-weight: 300;
+}
+
+footer {
+  text-align: center;
+}
+
+.weatherApp {
+  padding: 2%;
+  border: black 1px solid;
+  border-radius: 30px;
+}
+
+.searchRow {
+  margin: 3%;
+}
+
+.featured {
+  margin: 5% 5%;
+  font-size: 18px;
+}
+
+.activeCityImage {
+  width: 70%;
+  height: auto;
+  display: block;
+  margin: 0 auto 5% auto;
+}
+
+.bodyInfo {
+  display: block;
+  margin: 40% auto;
+  position: relative;
+  float: left;
+}
+
+.icons {
+  height: 20px;
+  width: 20px;
+}
+
+.week {
+  margin: 5% 2%;
+  text-align: center;
+}
+
+.weekIcons {
+  width: 40px;
+}
+
+#units {
+  font-size: 12px;
+  position: relative;
+  top: -10px;
+}
+
+#city-input {
+  margin-right: 2%;
+  margin-bottom: 2%;
+}
+
+#search-city-button {
+  padding-left: 5%;
+  margin-bottom: 2%;
+}
+
+#current-temp {
+  font-size: 50px;
+}

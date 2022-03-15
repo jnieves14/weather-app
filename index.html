@@ -29,10 +29,10 @@
     />
     <!-- linked css -->
     <link href="src/styles.css" rel="stylesheet" type="text/css" />
-    <title>W4Homework</title>
+    <title>Weather App</title>
   </head>
-  <body>
-    <div class="container weatherApp">
+  <body> 
+    <div class="container weatherApp" onload="currentCityButton()">
       <div class="row searchRow">
         <form class="search-form" id="search-form">
           <div class="row">
@@ -64,39 +64,49 @@
       </div>
 
       <!-- will eventually caraousel different cities -->
-      <div class="row featured">
-        <div class="col-7">
+      <div class="carousel">
+        <div class="row">
           <img
-          src="images/cloudy.png"
-          class="activeCityImage"
-          alt="weatherIcon"
+            src="images/cloudy.png"
+            class="activeCityImage"
+            alt="weatherIcon"
+            id="active-icon"
           />
-          <div class="date">
-            <h1 id="active-city-title">San Diego</h1>
-            <span id="user-date"></span>
-            <br />
-            <span id="user-time"></span>
-          </div>
         </div>
 
-        <div class="col-5">
-          <div class="bodyInfo">
-            <p>
-              <span id="current-temp">63°F</span>
-              <span id="units">
-                <!-- <a href="#" id="fahrenheit-link">°F</a>  -->
-                <!-- <a href="#" id="celsius-link">| °C</a> -->
-              </span>
+        <div class="row featured">
+          <div class="col-6">
+            <div class="date">
+              <h1 id="active-city-title">Fetching current city...</h1>
+              Last Updated:
               <br>
-              <span id="active-city-tempL">45°F</span> |
-              <span id="active-city-tempH">72°F</span>
+              <span id="user-date"></span>
               <br />
-              <img src="images/windIcon1.png" alt="wind" class="icons" />
-              <span id="active-city-wind">5mph</span>
-              |
-              <img src="images/humidIcon1.png" alt="humidity" class="icons" />
-              <span id="active-city-humidity">2%</span>
-            </p>
+              <span id="user-time"></span>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="bodyInfo">
+              <p>
+                <span id="current-temp">...</span>
+                <span id="units">
+                  <a href="#" class="tempLinks" id="fahrenheit-link">°F</a> |
+                  <a href="#" class="tempLinks" id="celsius-link">°C</a>
+                </span>
+                <br>
+                <span id="description"> </span>
+                <br>
+                <span id="active-city-tempL">Low</span>°F |
+                <span id="active-city-tempH">High</span>°F
+                <br />
+                <img src="images/windIcon1.png" alt="wind" class="icons"/>
+                <span id="active-city-wind"></span>
+                |
+                <img src="images/humidIcon1.png" alt="humidity" class="icons" />
+                <span id="active-city-humidity"></span>
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -3,7 +3,6 @@ body {
   margin: 5% auto;
   font-family: "Zen Kurenaido", sans-serif;
   line-height: 24px;
-  /* TODO: change cursor! */
   cursor: pointer;
 }
 
@@ -20,6 +19,7 @@ footer {
   padding: 2%;
   border: black 1px solid;
   border-radius: 30px;
+  cursor: pointer;
 }
 
 .searchRow {
@@ -27,12 +27,12 @@ footer {
 }
 
 .featured {
-  margin: 5% 5%;
+  margin: 0 auto;
   font-size: 18px;
 }
 
 .activeCityImage {
-  width: 70%;
+  width: 40%;
   height: auto;
   display: block;
   margin: 0 auto 5% auto;
@@ -40,9 +40,15 @@ footer {
 
 .bodyInfo {
   display: block;
-  margin: 40% auto;
+  margin: 0 auto;
   position: relative;
-  float: left;
+  /* float: right; */
+}
+
+.bodyInfo .tempLinks,
+.tempLinks:visited {
+  text-decoration: none;
+  color: black;
 }
 
 .icons {
@@ -60,9 +66,9 @@ footer {
 }
 
 #units {
-  font-size: 12px;
+  font-size: 16px;
   position: relative;
-  top: -10px;
+  top: -20px;
 }
 
 #city-input {
@@ -77,4 +83,8 @@ footer {
 
 #current-temp {
   font-size: 50px;
+}
+
+#description {
+  text-transform: capitalize;
 }

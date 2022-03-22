@@ -21,12 +21,9 @@
       crossorigin="anonymous"
     />
     <!-- goodle fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <!-- linked css -->
     <link href="src/styles.css" rel="stylesheet" type="text/css" />
     <title>Weather App</title>
@@ -63,8 +60,7 @@
         
       </div>
 
-      <!-- will eventually caraousel different cities -->
-      <div class="carousel">
+      <div>
         <div class="row">
           <img
             src="images/cloudy.png"
@@ -75,7 +71,8 @@
         </div>
 
         <div class="row featured">
-          <div class="col-6">
+          <div class="col-2"></div>
+          <div class="col-4">
             <div class="date">
               <h1 id="active-city-title">Fetching current city...</h1>
               Last Updated:
@@ -86,19 +83,18 @@
             </div>
           </div>
 
-          <div class="col-6">
+          <div class="col-4">
             <div class="bodyInfo">
               <p>
                 <span id="current-temp">...</span>
                 <span id="units">
-                  <a href="#" class="tempLinks" id="fahrenheit-link">°F</a> |
-                  <a href="#" class="tempLinks" id="celsius-link">°C</a>
+                  <a href="#" class="tempLinks" id="fahrenheit-link">°F</a>
                 </span>
                 <br>
                 <span id="description"> </span>
                 <br>
-                <span id="active-city-tempL">Low</span>°F |
-                <span id="active-city-tempH">High</span>°F
+                <span id="mainMinTemp">Low</span>°F |
+                <span id="mainMaxTemp">High</span>°F
                 <br />
                 <img src="images/windIcon1.png" alt="wind" class="icons"/>
                 <span id="active-city-wind"></span>
@@ -108,68 +104,23 @@
               </p>
             </div>
           </div>
+          <div class="col-2"></div>
         </div>
       </div>
       <hr />
 
-      <div class="row week">
-        <div class="col-2">
-          THU
-          <br />
-          <img src="images/sunny.png" class="weekIcons" alt="" />
-          <br />
-          80°F | 50°F
-        </div>
+      <div id="forecast">
 
-        <div class="col-2">
-          FRI
-          <br />
-          <img src="images/sunny.png" class="weekIcons" alt="" />
-          <br />
-          80°F | 50°F
-        </div>
-
-        <div class="col-2">
-          SAT
-          <br />
-          <img src="images/sunny.png" class="weekIcons" alt="" />
-          <br />
-          80°F | 50°F
-        </div>
-
-        <div class="col-2">
-          SUN
-          <br />
-          <img src="images/sunny.png" class="weekIcons" alt="" />
-          <br />
-          80°F | 50°F
-        </div>
-
-        <div class="col-2">
-          MON
-          <br />
-          <img src="images/sunny.png" class="weekIcons" alt="" />
-          <br />
-          80°F | 50°F
-        </div>
-
-        <div class="col-2">
-          TUE
-          <br />
-          <img src="images/sunny.png" class="weekIcons" alt="" />
-          <br />
-          80°F | 50°F
-        </div>
       </div>
 
       <footer>
-        This project was coded by Jannah Nieves and is open-sourced on 
+        Coded by Jannah Nieves | Open-sourced on 
         <a
           href="https://github.com/jnieves14/weather-app"
           title="weather app repo">
           Github
-        </a>
-        and hosted on 
+        </a> |
+        Hosted on 
         <a href="https://app.netlify.com/teams/jnieves14" title"Netlify">
           Netlify
         </a>

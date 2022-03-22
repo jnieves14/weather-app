@@ -44,9 +44,62 @@ let newUserTime = document.querySelector("#user-time");
 newUserTime.innerHTML = `${day} ${hours}:${minutes}`;
 
 // Global API variables
+let units = "imperial";
 let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-let endPoint = "https://api.openweathermap.org/data/2.5/weather";
+let endPoint = "https://api.openweathermap.org/data/2.5/";
 
+// Function to format the day for the forecast row
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+
+  return days[day];
+}
+
+// Function to display forecast
+function displayForecast(response) {
+  console.log(response.data.daily);
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML1 +
+        `
+      <div class="col-2">
+        <div class="weatherForecastDay">${formatDay(forecastDay.dt)}<div>
+        <img src="https://openweathermap.org/img/wn/${
+          forecastDay.weather[0].icon
+        }.png" alt="" />
+        <span class="forecastMinTemp">${Math.round(
+          forecastDay.temp.min
+        )}°F</span>| 
+        <span class="forecastMaxTemp">${Math.round(
+          forecastDay.temp.max
+        )}°F</span>
+      </div>
+  `;
+    }
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+  // divs are appended as nested divs
+}
+
+// Function to get coordinates
+function getCoordinatesForecast(coordinates) {
+  console.log(coordinates);
+  let latitude = coordinates.lat;
+  let longitude = coordinates.lon;
+  let apiUrl = `${endPoint}onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
+  console.log("getCoordinatesForecast", apiUrl);
+  axios.get(apiUrl).then(displayForecast);
+}
+
+// Function to grab API weather info
 function showTemperature(response) {
   fahrenheitTemperature = Math.round(response.data.main.temp);
   let updatedTemperature = document.querySelector("#current-temp");
@@ -60,13 +113,13 @@ function showTemperature(response) {
   let descriptionElement = document.querySelector("#description");
   descriptionElement.innerHTML = `${description}`;
 
-  let activeTempL = Math.round(response.data.main.temp_min);
-  let activeTempLelement = document.querySelector("#active-city-tempL");
-  activeTempLelement.innerHTML = `${activeTempL}`;
+  let mainMinTempApi = Math.round(response.data.main.temp_min);
+  let mainMinTempElement = document.querySelector("#mainMinTemp");
+  mainMinTempElement.innerHTML = `${mainMinTempApi}`;
 
-  let activeTempH = Math.round(response.data.main.temp_max);
-  let activeTempHelement = document.querySelector("#active-city-tempH");
-  activeTempHelement.innerHTML = `${activeTempH}`;
+  let mainMaxTempApi = Math.round(response.data.main.temp_max);
+  let mainMaxTempElement = document.querySelector("#mainMaxTemp");
+  mainMaxTempElement.innerHTML = `${mainMaxTempApi}`;
 
   let activeWind = Math.round(response.data.wind.speed);
   let activeWindElement = document.querySelector("#active-city-wind");
@@ -80,8 +133,10 @@ function showTemperature(response) {
   let activeIconElement = document.querySelector("#active-icon");
   activeIconElement.setAttribute(
     "src",
-    `https://openweathermap.org/img/wn/01n@2x.png`
+    `https://openweathermap.org/img/wn/${activeIcon}.png`
   );
+
+  getCoordinatesForecast(response.data.coord);
 }
 
 // Functions for city search engine
@@ -89,8 +144,7 @@ function citySearch(event) {
   event.preventDefault();
   let cityInput = document.querySelector("#city-input");
   cityInput = cityInput.value.trim().split(" ").join("").toLowerCase();
-  let units = "imperial";
-  let apiUrl = `${endPoint}?q=${cityInput}&appid=${apiKey}&units=${units}`;
+  let apiUrl = `${endPoint}weather?q=${cityInput}&appid=${apiKey}&units=${units}`;
 
   let searchCityName = document.querySelector("#active-city-title");
 
@@ -102,7 +156,8 @@ function citySearch(event) {
   }
 
   axios.get(apiUrl).then(showTemperature);
-  console.log(apiUrl);
+  // For Debugging purposes
+  // console.log("city search", apiUrl);
 }
 
 let userCitySearch = document.querySelector("#search-form");
@@ -112,11 +167,10 @@ userCitySearch.addEventListener("submit", citySearch);
 function getPosition(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
-  let units = "imperial";
-  let apiUrl = `${endPoint}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
+  let apiUrl = `${endPoint}weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
 
   axios.get(apiUrl).then(showTemperature);
-  console.log(apiUrl);
+  // console.log(apiUrl);
 }
 
 function currentCityButton(event) {
@@ -125,32 +179,9 @@ function currentCityButton(event) {
 }
 
 let currentCityInfo = document.querySelector("#current-location-button");
+currentCityInfo.onclick = function () {
+  console.log("Current city button clicked.");
+};
 currentCityInfo.addEventListener("click", currentCityButton);
 
 window.onload = currentCityButton;
-
-// Temperature conversion functions
-let fahrenheitTemperature = null;
-
-function showCelsiusTemperature(event) {
-  event.preventDefault();
-  celsiusLink.classList.remove("tempLinks");
-  fahrenheitLink.classList.add("tempLinks");
-  let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
-  // TODO: make updatedTemperature a global variable as it is used multiple times
-  let updatedTemperature = document.querySelector("#current-temp");
-  updatedTemperature.innerHTML = Math.round(celsiusTemperature);
-}
-
-let celsiusLink = document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", showCelsiusTemperature);
-
-function showFahrenheitTemperature(event) {
-  event.preventDefault();
-  fahrenheitLink.classList.remove("tempLinks");
-  celsiusLink.classList.add("tempLinks");
-  let updatedTemperature = document.querySelector("#current-temp");
-  updatedTemperature.innerHTML = Math.round(fahrenheitTemperature);
-}
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", showFahrenheitTemperature);

@@ -1,7 +1,9 @@
 body {
   max-width: 50%;
   margin: 5% auto;
-  font-family: "Zen Kurenaido", sans-serif;
+  font-family: "Anonymous Pro", monospace;
+  font-size: 16px;
+  font-weight: 80;
   line-height: 24px;
   cursor: pointer;
 }
@@ -32,17 +34,22 @@ footer {
 }
 
 .activeCityImage {
-  width: 40%;
+  width: 30%;
   height: auto;
   display: block;
-  margin: 0 auto 5% auto;
+  margin: 0 auto;
+}
+
+.mainMaxTemp,
+.forecastMaxTemp {
+  font-weight: 900;
 }
 
 .bodyInfo {
   display: block;
   margin: 0 auto;
   position: relative;
-  /* float: right; */
+  float: right;
 }
 
 .bodyInfo .tempLinks,
@@ -56,13 +63,9 @@ footer {
   width: 20px;
 }
 
-.week {
+#forecast {
   margin: 5% 2%;
   text-align: center;
-}
-
-.weekIcons {
-  width: 40px;
 }
 
 #units {

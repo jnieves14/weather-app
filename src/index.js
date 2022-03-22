@@ -68,8 +68,7 @@ function displayForecast(response) {
       forecastHTML =
         forecastHTML +
         `
-      <div class="col-2">
-        <div class="weatherForecastDay">${formatDay(forecastDay.dt)}<div>
+      <div class="col-2 weatherForecastDay">${formatDay(forecastDay.dt)}
         <img src="https://openweathermap.org/img/wn/${
           forecastDay.weather[0].icon
         }.png" alt="" />
@@ -86,7 +85,6 @@ function displayForecast(response) {
 
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
-  // divs are appended as nested divs
 }
 
 // Function to get coordinates
